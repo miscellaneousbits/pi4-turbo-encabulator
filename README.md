@@ -24,8 +24,8 @@ sudo make install
 
 sudo cp fanmon.service /etc/systemd/system
 
-sudo systemctl enable fanmon.servicesudo
-systemctl start fanmon.service
+sudo systemctl enable fanmon.service
+sudo systemctl start fanmon.service
 ```
 
 This daemon takes periodic temperature measurements and manages the fan to keep the SOC temperature below 70C.
