@@ -4,10 +4,10 @@ JP1  Fem. Pi Connector      PINHD-2X20      2X20                   PIN HEADER
 JP2  Fem. UPDI Header       PINHD-1X3       1X03                   PIN HEADER
 LED1 GREEN                  LEDCHIPLED_1206 CHIPLED_1206           LED
 R1   3.3K                   R-US_R0805      R0805                  RESISTOR
-R2   4.7K                   R-US_R0805      R0805                  RESISTOR, American symbol
-R3   470K                   R-US_R0805      R0805                  RESISTOR, American symbol
-R4   4.7K                   R-US_R0805      R0805                  RESISTOR, American symbol
-R5   4.7K                   R-US_R0805      R0805                  RESISTOR, American symbol
-R6   4.7K                   R-US_R0805      R0805                  RESISTOR, American symbol
-U1   ATTINY212              ATTINY212       SO8                    SOIC-8(150MIL)(1.27MM)
+R2   4.7K                   R-US_R0805      R0805                  RESISTOR
+R3   470K                   R-US_R0805      R0805                  RESISTOR
+R4   4.7K                   R-US_R0805      R0805                  RESISTOR
+R5   4.7K                   R-US_R0805      R0805                  RESISTOR
+R6   4.7K                   R-US_R0805      R0805                  RESISTOR
+U1   ATTINY212              ATTINY212       SO8                    Microcontroller
 U2   IRF7103TRPBF           NMOS2SO8        SO8                    Dual MOS FET
