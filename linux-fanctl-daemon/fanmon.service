@@ -1,0 +1,12 @@
+[Unit]
+Description=Fan Control Service
+After=multi-user.target
+
+
+[Service]
+ExecStart=/usr/local/bin/fanmon -v 1
+Type=notify
+SyslogIdentifier=fanmon
+
+[Install]
+WantedBy=multi-user.target
