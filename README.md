@@ -30,7 +30,7 @@ sudo systemctl start fanmon.service
 
 This daemon takes periodic temperature measurements and manages the fan to keep the SOC temperature below 70C.
 
-Since this is for Pi 4, might as well take advantage of the new bug free I2C ports. With clock stretching properly supported on the new ports, we can take advantage of the ATtiny212's deep sleep mode to minimize fan circuit power consumption. In you /boot/config.txt file, comment out:
+Since this is for Pi 4, might as well take advantage of the new bug free I2C ports. With clock stretching properly supported on the new ports, we can take advantage of the ATtiny212's deep sleep mode to minimize fan circuit power consumption. In your /boot/config.txt file, comment out:
 
 ```
 #dtparam=i2c_arm=on
