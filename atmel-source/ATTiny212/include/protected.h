@@ -2,4 +2,5 @@
 #pragma once
 #include "common.h"
 
+// Do the sneaky handshake to set a protected control register
 void protected_write_io(void* addr, uint8_t magic, uint8_t value);
