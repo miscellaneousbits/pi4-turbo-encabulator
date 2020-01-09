@@ -9,6 +9,7 @@
 
 static int fd = -1;
 
+// Temperature from Videocore
 int tempOpen(void)
 {
     fd = open("/dev/vcio", 0);

@@ -10,16 +10,18 @@
 #include "log.h"
 #include "temp.h"
 
-static float high_temp_threshold = 78.0;
-static float low_temp_threshold = 67.0;
-static volatile uint8_t running = 1u;
-static int logLevel = 0;
+static float high_temp_threshold = 78.0; // Target max. die temp
+static float low_temp_threshold = 67.0;  // Fan start temp.
+static volatile uint8_t running = 1u;    // Abort (CTL-C) flag
+static int logLevel = 0;                 // Log verbosity
 
+// Catch terminal events
 static void ctlc_handler(int s)
 {
     running = 0;
 }
 
+// display help to stdout
 static void help(char* av)
 {
     printf(
@@ -31,6 +33,7 @@ static void help(char* av)
         av, (int)low_temp_threshold, (int)high_temp_threshold);
 }
 
+// Use exponential smoothing
 static uint8_t Average(float p)
 {
     static float sum = 0;
@@ -38,6 +41,7 @@ static uint8_t Average(float p)
     return sum;
 }
 
+// Run once per sampling interval process
 static int process_interval(void)
 {
     uint32_t temp = getTemp();
@@ -47,6 +51,7 @@ static int process_interval(void)
         Log(LOG_ERR, "%sError retrieving temperature\n");
         return -1;
     }
+    // Calculate new fan speed in the 0-127 range
     float p;
     if (temp <= low_temp_threshold)
         p = 0;
@@ -55,16 +60,20 @@ static int process_interval(void)
     else
         p = ((temp - low_temp_threshold) * 127.0) /
             (high_temp_threshold - low_temp_threshold);
+    // Apply smoothing
     uint8_t ap = Average(p);
+    // Set the fan speed
     fanPower(ap);
     // Conditionally log the full status
     static uint8_t lastP = 0;
+    // for verbosity >= 1, log fan on/off transitions
     if (logLevel > 0)
     {
         if ((lastP && !ap) || (!lastP && ap))
             Log(LOG_INFO, "Fan o%s\n", ap ? "n" : "ff");
         lastP = ap;
     }
+    // for verbosity > 1, log die temp and fan rpm at every interval
     if (logLevel > 1)
         Log(LOG_INFO, "FAN %u% TEMP %u RPM %u\n", (ap * 128) / 100, temp,
             fanRPM());
@@ -74,6 +83,8 @@ static int process_interval(void)
 int main(int ac, char* av[])
 {
     const uint32_t poll_interval = 2;
+
+    LogInit();
 
     // Parse parameters
     int opt;
@@ -103,8 +114,6 @@ int main(int ac, char* av[])
             goto error;
         }
     }
-
-    LogInit();
 
     // Starting
     Log(LOG_INFO, "Fan control starting, log level %d\n", logLevel);
@@ -147,18 +156,20 @@ int main(int ac, char* av[])
         sleep(poll_interval);
     }
 
+    // Time to exit...
     fanClose();
     tempClose();
     Log(LOG_INFO, "Stopped\n");
     return 0;
 
 error:
-    fanClose();
-    tempClose();
-    Log(LOG_ERR, "Stopped with error\n");
-    sd_notifyf(0,
-        "STATUS=Failed: %s\n"
-        "ERRNO=%d",
-        strerror(errno), errno);
-    return -1;
+  // Exit with error.
+  fanClose();
+  tempClose();
+  Log(LOG_ERR, "Stopped with error\n");
+  sd_notifyf(0,
+             "STATUS=Failed: %s\n"
+             "ERRNO=%d",
+             strerror(errno), errno);
+  return -1;
 }
