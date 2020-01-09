@@ -20,6 +20,9 @@ Done building and programing the hat. Now to control it.
 To build and install the fanmon daemon under Raspbian:
 
 ```
+#install prerequites
+sudo apt install libsystemd-dev
+ 
 sudo make install
 
 sudo cp fanmon.service /etc/systemd/system
