@@ -9,7 +9,7 @@ You'll find everything you need in the hardware folder. Use the bill of material
 
 ## Programming the Atmel ATtiny212
 
-The ATtiny212 packs an amazing amount of capabilities for an 8 bit processor in an 8 pin package (and we use all 8 pins!). I use it here to implement an I2C slave interface and a PWM generator for the fan. Once the board is built you can use the 3 pin UPDI header and an appropriate programmer to write its software to on-chip flash. No need to purchase a commercial UPDI programmer, look [here](https://www.jsykora.info/2019/04/avr-updi-programmer-from-attiny817-xplained-mini/) for a cheap solution using a $15 ATtiny817 Xplained Mini.
+The ATtiny212 packs an amazing amount of capabilities for an 8 bit processor in an 8 pin package (and we use all 8 pins!). I use it here to implement an I2C slave interface and a PWM generator for the fan. The microcontroller has dedicated I2C and PWM hadware blocks, so no bit banging involved... Nice! Once the board is built you can use the 3 pin UPDI header and an appropriate programmer to write its software to on-chip flash. No need to purchase a commercial UPDI programmer, look [here](https://www.jsykora.info/2019/04/avr-updi-programmer-from-attiny817-xplained-mini/) for a cheap solution using a $15 ATtiny817 Xplained Mini.
 
 Install and use Atmel Studio 7 to build and flash the ATTiny212.asln project from folder atmel-source using your programmer. Programmer support is built in to Atmel Studio.
 
