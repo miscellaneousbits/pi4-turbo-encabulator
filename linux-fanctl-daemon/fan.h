@@ -28,6 +28,5 @@ void fanClose(void);
 // Set the fan power level
 void fanPower(uint8_t s);
 
-// Retrieve the fan RPM. Actually
-// return revolutions per second
+// Retrieve the fan RPM.
 uint32_t fanRPM(void);
