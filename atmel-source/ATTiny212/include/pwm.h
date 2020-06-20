@@ -16,8 +16,6 @@
 */
 
 #pragma once
-#include "common.h"
-
 #include "clkctrl.h"
 
 // Fan speed range 0-127

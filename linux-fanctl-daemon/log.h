@@ -16,7 +16,6 @@
 */
 
 #pragma once
-
 #include <syslog.h>
 
 // Setup logging

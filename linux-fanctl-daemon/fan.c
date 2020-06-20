@@ -48,10 +48,11 @@ static const char* i2c_device = "/dev/i2c-3";
 // Initialize the fan controller
 int fanInit(void)
 {
-  // Communicate via I2C
-  if ((file_i2c = open(i2c_device, O_RDWR)) < 0) {
-    Log(LOG_ERR, "Failed to open the i2c bus\n");
-    return -1;
+    // Communicate via I2C
+    if ((file_i2c = open(i2c_device, O_RDWR)) < 0)
+    {
+        Log(LOG_ERR, "Failed to open the i2c bus\n");
+        return -1;
     }
 
     const int addr = 0x2c;  //<<<<<The I2C address of the slave
@@ -73,19 +74,19 @@ void fanClose(void)
 // Set the fan power level
 void fanPower(uint8_t s)
 {
-  // Set new fan speed by sending single byte (values = 0-127)
-  if (write(file_i2c, &s, sizeof(s)) != sizeof(s))
-    Log(LOG_ERR, "Failed to write to the i2c bus.\n");
+    // Set new fan speed by sending single byte (values = 0-127)
+    if (write(file_i2c, &s, sizeof(s)) != sizeof(s))
+        Log(LOG_ERR, "Failed to write to the i2c bus.\n");
 }
 
 // Retrieve the fan RPM
 uint32_t fanRPM(void)
 {
-  // Retrieve RPM (atually revs per sec.) by reading
-  // single byte.
-  uint8_t rpm;
-  if (read(file_i2c, &rpm, sizeof(rpm)) != sizeof(rpm))
-    Log(LOG_ERR, "Failed to read to the i2c bus.\n");
-  // Convert RPS to RPM
-  return (uint32_t)rpm * 60;
+    // Retrieve RPM (atually revs per sec.) by reading
+    // single byte.
+    uint8_t rpm;
+    if (read(file_i2c, &rpm, sizeof(rpm)) != sizeof(rpm))
+        Log(LOG_ERR, "Failed to read to the i2c bus.\n");
+    // Convert RPS to RPM
+    return (uint32_t)rpm * 60;
 }
