@@ -15,9 +15,8 @@
     along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <stdio.h>
-
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 

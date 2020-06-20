@@ -16,7 +16,6 @@
 */
 
 #pragma once
-
 #include "common.h"
 
 // Set by main to new fan speed

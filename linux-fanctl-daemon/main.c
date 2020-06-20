@@ -27,10 +27,10 @@
 #include "log.h"
 #include "temp.h"
 
-static float high_temp_threshold = 78.0; // Target max. die temp
-static float low_temp_threshold = 67.0;  // Fan start temp.
-static volatile uint8_t running = 1u;    // Abort (CTL-C) flag
-static int logLevel = 0;                 // Log verbosity
+static float high_temp_threshold = 78.0;  // Target max. die temp
+static float low_temp_threshold = 67.0;   // Fan start temp.
+static volatile uint8_t running = 1u;     // Abort (CTL-C) flag
+static int logLevel = 0;                  // Log verbosity
 
 // Catch terminal events
 static void ctlc_handler(int s)
@@ -180,13 +180,13 @@ int main(int ac, char* av[])
     return 0;
 
 error:
-  // Exit with error.
-  fanClose();
-  tempClose();
-  Log(LOG_ERR, "Stopped with error\n");
-  sd_notifyf(0,
-             "STATUS=Failed: %s\n"
-             "ERRNO=%d",
-             strerror(errno), errno);
-  return -1;
+    // Exit with error.
+    fanClose();
+    tempClose();
+    Log(LOG_ERR, "Stopped with error\n");
+    sd_notifyf(0,
+        "STATUS=Failed: %s\n"
+        "ERRNO=%d",
+        strerror(errno), errno);
+    return -1;
 }

@@ -16,7 +16,6 @@
 */
 
 #pragma once
-#include "common.h"
 #include "port.h"
 
 // Setup LED control

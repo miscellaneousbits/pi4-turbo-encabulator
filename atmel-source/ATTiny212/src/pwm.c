@@ -15,8 +15,9 @@
     along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "port.h"
 #include "pwm.h"
+
+#include "port.h"
 
 void PWM_init(void)
 {

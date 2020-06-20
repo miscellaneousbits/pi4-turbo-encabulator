@@ -16,7 +16,6 @@
 */
 
 #pragma once
-
 #include <stdint.h>
 
 // Initialize the fan controller

@@ -15,8 +15,9 @@
     along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "led.h"
 #include "rpm.h"
+
+#include "led.h"
 
 // Updated once per second with rotation count
 volatile uint8_t g_rotations = 0;
